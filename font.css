@@ -1,0 +1,16 @@
+@import url("Cascadia/cascadia.css");
+@import url("IBM-Plex/css/ibm-plex.css");
+@import url("OPPOSans/oppo-sans.css");
+@import url("JasonHandwriting/jason-hw.css");
+@import url("I﹒/I﹒.css");
+@import url("TaipeiSans/taipei-sans.css");
+
+@font-face {
+    font-family: Huninn;
+    src: url(jf-openhuninn-1.1.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: Sans_Forgetica;
+    src: url(SansForgetica-Regular.otf) format('opentype');
+}

@@ -1,0 +1,5 @@
+@font-face { font-family: 'OPPO_Sans'; font-weight: 200; src: local("OPPOSans L"), local("OPPOSans-L"), url("OPPOSans-L.ttf") format('truetype'); }
+@font-face { font-family: 'OPPO_Sans'; font-weight: 400; src: local("OPPOSans R"), local("OPPOSans-R"), url("OPPOSans-R.ttf") format('truetype'); }
+@font-face { font-family: 'OPPO_Sans'; font-weight: 500; src: local("OPPOSans M"), local("OPPOSans-M"), url("OPPOSans-M.ttf") format('truetype'); }
+@font-face { font-family: 'OPPO_Sans'; font-weight: 700; src: local("OPPOSans B"), local("OPPOSans-B"), url("OPPOSans-B.ttf") format('truetype'); }
+@font-face { font-family: 'OPPO_Sans'; font-weight: 900; src: local("OPPOSans H"), local("OPPOSans-H"), url("OPPOSans-H.ttf") format('truetype'); }

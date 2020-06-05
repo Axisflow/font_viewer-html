@@ -1,0 +1,6 @@
+@font-face { font-family: 'I-Ming_S'; src: local("一點明體 標準體"), local("I.Ming-6.11"), url("I.Ming-6.11.ttf") format('truetype'); }
+@font-face { font-family: 'I-Ming_S_CP'; src: local("一點明體CP 標準體"), local("I.MingCP-6.11"), url("I.MingCP-6.11.ttf") format('truetype'); }
+@font-face { font-family: 'I-Ming_Var'; src: local("一點明體異體 標準體"), local("I.MingVar-6.11"), url("I.MingVar-6.11.ttf") format('truetype'); }
+@font-face { font-family: 'I-Ming_Var_CP'; src: local("一點明體異體CP 標準體"), local("I.MingVarCP-6.11"), url("I.MingVarCP-6.11.ttf") format('truetype'); }
+@font-face { font-family: 'I-Ngaan'; src: local("I.Ngaan"), local("I.Ngaan"), url("I.Ngaan.ttf") format('truetype'); }
+@font-face { font-family: 'I-PenCrane-B'; src: local("I.PenCrane-B"), local("I.PenCrane-B"), url("I.PenCrane-B.ttf") format('truetype'); }

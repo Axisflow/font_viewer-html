@@ -1,0 +1,3 @@
+@font-face { font-family: 'Taipei_Sans'; font-weight: 300; src: local("Taipei Sans TC Beta Light"), local("TaipeiSansTCBeta-Light"), url("TaipeiSansTCBeta-Light.ttf") format('truetype'); }
+@font-face { font-family: 'Taipei_Sans'; font-weight: 400; src: local("Taipei Sans TC Beta Regular"), local("TaipeiSansTCBeta-Regular"), url("TaipeiSansTCBeta-Regular.ttf") format('truetype'); }
+@font-face { font-family: 'Taipei_Sans'; font-weight: 700; src: local("Taipei Sans TC Beta Bold"), local("TaipeiSansTCBeta-Bold"), url("TaipeiSansTCBeta-Bold.ttf") format('truetype'); }
