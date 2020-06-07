@@ -65,6 +65,11 @@
             }
 
         body {
+            /* Anti-Theft */
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            /* \Anti-Theft\ */
             text-align: center;
             animation: bgcc 60s linear 0s infinite;
         }
@@ -220,6 +225,27 @@
             }
     </style>
     <script language="JavaScript" type="text/javascript">
+        //
+        //Anti-Theft
+        //
+        var disableKey = true;
+        var disableKey_way = 2; // 1 = exit directly; 2 = block continue
+        document.onkeydown = function (e) {
+            if ((e.ctrlKey && (e.keyCode === 65 || e.keyCode === 67 || e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 80 || e.keyCode === 83 || e.keyCode === 85 || e.keyCode === 86 || e.keyCode === 117)) || e.keyCode == 18 || e.keyCode == 123) {
+                if (disableKey == true) {
+                    if (prompt('hihi', '#') == "#") {
+                        disableKey = false;
+                        (document.getElementsByTagName("body"))[0].style.userSelect = "auto";
+                    } else {
+                        if (disableKey_way = 1) { window.opener = null; window.close(); }
+
+                        if (disableKey_way = 2) { alert('Hi'); }
+                    }
+                }
+            }
+        }
+        document.ondragstart = function () { return false }; //for image
+        document.oncontextmenu = function (e) { return false }; //for right
         //
         //Change Font
         //
@@ -423,13 +449,10 @@
         //
         //Top
         //
-        mybutton = document.getElementById("gotop");
-
-        // When the user clicks on the button, scroll to the top of the document
         function topFunction() {
             document.body.scrollTop = 0; // For Safari
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        }
+        } // When the user clicks on the button, scroll to the top of the document
     </script>
 </head>
 <body>
