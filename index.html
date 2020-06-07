@@ -249,7 +249,7 @@
             }
         }; //for keyboard
         document.ondragstart = function (e) { enableKey(); }; //for image
-        document.oncontextmenu = function (e) { enableKey(); }; //for right
+        document.oncontextmenu = function (e) { if (disableKey == true) { return false; } }; //for right
         //
         //Change Font
         //
