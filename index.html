@@ -233,13 +233,13 @@
         document.onkeydown = function (e) {
             if ((e.ctrlKey && (e.keyCode === 65 || e.keyCode === 67 || e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 80 || e.keyCode === 83 || e.keyCode === 85 || e.keyCode === 86 || e.keyCode === 117)) || e.keyCode == 18 || e.keyCode == 123) {
                 if (disableKey == true) {
-                    if (prompt('hihi', '#') == "#") {
+                    if (prompt('防盜密鑰', '#') == "#") {
                         disableKey = false;
                         (document.getElementsByTagName("body"))[0].style.userSelect = "auto";
                     } else {
                         if (disableKey_way = 1) { window.opener = null; window.close(); }
 
-                        if (disableKey_way = 2) { alert('Hi'); return false; }
+                        if (disableKey_way = 2) { alert('亂來？想得美！'); return false; }
                     }
                 }
             }
