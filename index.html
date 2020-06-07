@@ -243,9 +243,9 @@
                     }
                 }
             }
-        }
-        document.ondragstart = function () { return false }; //for image
-        document.oncontextmenu = function (e) { return false }; //for right
+        }; //for keyboard
+        document.ondragstart = function () { if (disableKey == true) { return false; } }; //for image
+        document.oncontextmenu = function (e) { if (disableKey == true) { return false; } }; //for right
         //
         //Change Font
         //
