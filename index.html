@@ -230,22 +230,26 @@
         //
         var disableKey = true;
         var disableKey_way = 2; // 1 = exit directly; 2 = block continue
-        document.onkeydown = function (e) {
-            if ((e.ctrlKey && (e.keyCode === 65 || e.keyCode === 67 || e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 80 || e.keyCode === 83 || e.keyCode === 85 || e.keyCode === 86 || e.keyCode === 117)) || e.keyCode == 18 || e.keyCode == 123) {
-                if (disableKey == true) {
-                    if (prompt('防盜密鑰', '#') == "#") {
-                        disableKey = false;
-                        (document.getElementsByTagName("body"))[0].style.userSelect = "auto";
-                    } else {
-                        if (disableKey_way = 1) { window.opener = null; window.close(); }
+        function enableKey() {
+            if (disableKey == true) {
+                if (prompt('防盜密鑰', '#') == "#") {
+                    disableKey = false;
+                    (document.getElementsByTagName("body"))[0].style.userSelect = "auto";
+                } else {
+                    if (disableKey_way = 1) { window.opener = null; window.close(); }
 
-                        if (disableKey_way = 2) { alert('亂來？想得美！'); return false; }
-                    }
+                    if (disableKey_way = 2) { alert('亂來？想得美！'); return false; }
                 }
             }
+        }
+
+        document.onkeydown = function (e) {
+            if ((e.ctrlKey && (e.keyCode === 65 || e.keyCode === 67 || e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 80 || e.keyCode === 83 || e.keyCode === 85 || e.keyCode === 86 || e.keyCode === 117)) || e.keyCode == 18 || e.keyCode == 123) {
+                enableKey();
+            }
         }; //for keyboard
-        document.ondragstart = function () { if (disableKey == true) { return false; } }; //for image
-        document.oncontextmenu = function (e) { if (disableKey == true) { return false; } }; //for right
+        document.ondragstart = function (e) { enableKey(); }; //for image
+        document.oncontextmenu = function (e) { enableKey(); }; //for right
         //
         //Change Font
         //
