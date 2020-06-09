@@ -1,0 +1,642 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Font Famliy</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Preview Fonts">
+    <meta name="author" content="Axialflow(王證傑)">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="Shortcut Icon" type="image/x-icon" href="fontview.ico" />
+    <style type="text/css">
+        @import "font.css";
+
+        .face {
+            font-size: 40px;
+        }
+
+        .example {
+            font-size: 30px;
+            animation: txcc 60s linear 0s infinite;
+        }
+
+        .tip_block {
+            display: inline-block;
+            padding: 15px 5px;
+            margin: 10px;
+            border-style: dotted;
+            border-width: 1.5px;
+        }
+            .tip_block span {
+                background: #f7f7f7;
+                border-radius: 15px;
+                border-style: none solid;
+                border-width: 0.5px;
+                padding: 10px 5px;
+                margin: 5px;
+                font-size: 20px;
+            }
+
+        code {
+            background-color: #dddddd;
+            padding: 0 1px;
+            border-style: dashed;
+            border-width: 0.5px;
+        }
+
+        input {
+            font-size: 30px;
+            width: 500px;
+        }
+
+        a {
+            font-size: 20px;
+            -moz-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+            -webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+            -ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+            transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+            border-bottom: dotted 1px;
+            color: #ff6a00;
+            text-decoration: none;
+        }
+
+            a:hover {
+                border-bottom-color: transparent;
+                color: #999999;
+            }
+
+        body {
+            /* Anti-Theft */
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            /* \Anti-Theft\ */
+            text-align: center;
+            animation: bgcc 60s linear 0s infinite;
+        }
+
+        @keyframes bgcc {
+            0% {
+                background: #ffffdd;
+            }
+
+            25% {
+                background: #ffdddd;
+            }
+
+            50% {
+                background: #ddffdd;
+            }
+
+            75% {
+                background: #ddddff;
+            }
+
+            100% {
+                background: #ffffdd;
+            }
+        }
+
+        @keyframes txcc {
+            0% {
+                color: #0000ff;
+            }
+
+            25% {
+                color: #00ff00;
+            }
+
+            50% {
+                color: #ff0000;
+            }
+
+            75% {
+                color: #ffff00;
+            }
+
+            100% {
+                color: #0000ff;
+            }
+        }
+
+        #panel {
+            transition: left 2s;
+            position: fixed;
+            left: -105px;
+            top: 150px;
+            border-radius: 0 20px 20px 0;
+            background: #eeeeee;
+            padding: 20px 0 20px 5px;
+            border-style: solid;
+            border-color: #ff6a00;
+            border-width: 1.5px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+            #panel::after {
+                content: '>';
+                font-size: 25px;
+                border-radius: 0 20px 20px 0;
+                background-color: #ff6a00;
+                color: #ffffff;
+            }
+            #panel:hover {
+                left: -1px;
+            }
+
+        #loading{
+            display: none;
+        }
+
+        .loading#loading {
+            position: fixed;
+            background-color: #222222;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes loading-eclipse-enclose {
+            0% {
+                transform: rotate(0deg)
+            }
+
+            100% {
+                transform: rotate(1440deg)
+            }
+        }
+
+        @keyframes loading-image {
+            0% {
+                transform: scale(1)
+            }
+
+            25% {
+                transform: scale(1.125)
+            }
+
+            75% {
+                transform: scale(0.875)
+            }
+
+            100% {
+                transform: scale(1)
+            }
+        }
+
+        .loading-eclipse-enclose div {
+            position: absolute;
+            animation: loading-eclipse-enclose 2s ease-in-out infinite;
+            width: 160px;
+            height: 160px;
+            top: 20px;
+            left: 20px;
+            border-radius: 50%;
+            box-shadow: 0 4px 0 0 #999;
+            transform-origin: 80px 82px;
+        }
+
+        .loading-eclipse {
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+            overflow: hidden;
+            vertical-align:middle;
+        }
+
+        .loading-eclipse-enclose {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform: translateZ(0) scale(1);
+            backface-visibility: hidden;
+            transform-origin: 0 0; /* see note above */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .loading-eclipse-enclose div {
+                box-sizing: content-box;
+            }
+    </style>
+    <script language="JavaScript" type="text/javascript">
+        //
+        //Anti-Theft
+        //
+        var disableKey = true;
+        var disableKey_way = 2; // 1 = exit directly; 2 = block continue
+        function enableKey() {
+            if (disableKey == true) {
+                if (prompt('防盜密鑰', '#') == "#") {
+                    disableKey = false;
+                    (document.getElementsByTagName("body"))[0].style.userSelect = "auto";
+                } else {
+                    if (disableKey_way = 1) { window.opener = null; window.close(); }
+
+                    if (disableKey_way = 2) { alert('亂來？想得美！'); return false; }
+                }
+            }
+        }
+
+        document.onkeydown = function (e) {
+            if ((e.ctrlKey && (e.keyCode === 65 || e.keyCode === 67 || e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 80 || e.keyCode === 83 || e.keyCode === 85 || e.keyCode === 86 || e.keyCode === 117)) || e.keyCode == 18 || e.keyCode == 123) {
+                enableKey();
+            }
+        }; //for keyboard
+        document.ondragstart = function (e) { enableKey(); }; //for image
+        document.oncontextmenu = function (e) { if (disableKey == true) { return false; } }; //for right
+        //
+        //Add Font
+        //
+        function addFont(classname, face, example, fonts, fontsName, isOnlyFont) {
+            var mainBlock = document.getElementById('blocks');
+            var newBlock = document.createElement('div');
+            var pFace, pExample = document.createElement('p');
+            var newInput = document.createElement('input');
+
+            mainBlock.appendChild(newBlock);
+            mainBlock.appendChild(document.createElement('hr'));
+
+            newBlock.appendChild(pFace);
+            newBlock.appendChild(pExample);
+            newBlock.appendChild(newInput);
+
+            pFace.className = "face";
+            pFace.innerHTML = face;
+            if (isOnlyFont == false) { pFace.appendChild(document.createElement('br')); }
+            for (i = 0; i < fonts.length; i++) {
+                var newA = document.createElement('a');
+                pFace.appendChild(newA);
+                newA.href = "javascript:setFont('" + classname + "', '" + fonts[i] + "');";
+                newA.innerHTML = fontsName[i];
+                pFace.innerHTML += " ";
+            }
+
+            pExample.className = "example";
+            pExample.innerHTML = example;
+
+            newInput.type = "text";
+            newInput.className = classname;
+            newInput.style.fontFamily = fonts[0];
+            newInput.placeholder = "#" + fonts[0];
+
+            newBlock.className = classname;
+            newBlock.style.fontFamily = fonts[0];
+        }
+        //
+        //Change Font
+        //
+        function setFont(classname, face) {
+            var font = document.getElementsByClassName(classname);
+            font[0].style.fontFamily = face;
+            font[1].style.fontFamily = face;
+            font[1].placeholder = "#" + face;
+        }
+        //
+        //Resize
+        //
+        var smin = -10;
+        var smax = 10;
+        function increaseFontSize() {
+            var face = document.getElementsByClassName('face');
+            var example = document.getElementsByClassName('example');
+            var input = document.getElementsByTagName('input');
+            for (i = 0; i < face.length; i++) {
+                if (face[i].style.fontSize) {
+                    var s = parseInt(face[i].style.fontSize.replace("px", ""));
+                } else {
+                    var s = 40;
+                }
+                if (s != smax + 40) {
+                    s += 1;
+                }
+                face[i].style.fontSize = s + "px"
+            }
+            for (i = 0; i < example.length; i++) {
+                if (example[i].style.fontSize) {
+                    var s = parseInt(example[i].style.fontSize.replace("px", ""));
+                } else {
+                    var s = 30;
+                }
+                if (s != smax + 30) {
+                    s += 1;
+                }
+                example[i].style.fontSize = s + "px";
+                input[i].style.fontSize = s + "px";
+            }
+        }
+        function decreaseFontSize() {
+            var face = document.getElementsByClassName('face');
+            var example = document.getElementsByClassName('example');
+            var input = document.getElementsByTagName('input');
+            for (i = 0; i < face.length; i++) {
+                if (face[i].style.fontSize) {
+                    var s = parseInt(face[i].style.fontSize.replace("px", ""));
+                } else {
+                    var s = 40;
+                }
+                if (s != smin + 40) {
+                    s -= 1;
+                }
+                face[i].style.fontSize = s + "px"
+            }
+            for (i = 0; i < example.length; i++) {
+                if (example[i].style.fontSize) {
+                    var s = parseInt(example[i].style.fontSize.replace("px", ""));
+                } else {
+                    var s = 30;
+                }
+                if (s != smin + 30) {
+                    s -= 1;
+                }
+                example[i].style.fontSize = s + "px"
+                input[i].style.fontSize = s + "px";
+            }
+        }
+        //
+        //Weight
+        //
+        var statusWeight = 400;
+        function Change_Weight(par) {
+            var input = document.getElementsByTagName('input');
+            var p = document.getElementsByTagName('p');
+            if (par == "+" & statusWeight < 900) {
+                statusWeight += 50;
+                for (i = 0; i < input.length; i++) {
+                    input[i].style.fontWeight = statusWeight;
+                }
+                for (i = 0; i < p.length; i++) {
+                    p[i].style.fontWeight = statusWeight;
+                }
+            } if (par == "-" & statusWeight > 100) {
+                statusWeight -= 50;
+                for (i = 0; i < input.length; i++) {
+                    input[i].style.fontWeight = statusWeight;
+                }
+                for (i = 0; i < p.length; i++) {
+                    p[i].style.fontWeight = statusWeight;
+                }
+            }
+        }
+        //
+        //Italic
+        //
+        var isItalic = 0;
+        function toItalic() {
+            var input = document.getElementsByTagName('input');
+            var p = document.getElementsByTagName('p');
+            if (isItalic == 0) {
+                isItalic = 1;
+                for (i = 0; i < input.length; i++) {
+                    input[i].style.fontStyle = "italic";
+                }
+                for (i = 0; i < p.length; i++) {
+                    p[i].style.fontStyle = "italic";
+                }
+            } else {
+                isItalic = 0;
+                for (i = 0; i < input.length; i++) {
+                    input[i].style.fontStyle = "normal";
+                }
+                for (i = 0; i < p.length; i++) {
+                    p[i].style.fontStyle = "normal";
+                }
+            }
+        }
+        //
+        //Line
+        //
+        var statusLine = 0;
+        function Change_Line() {
+            var input = document.getElementsByTagName('input');
+            var example = document.getElementsByClassName('example');
+            if (statusLine == 0) {
+                statusLine = 1;
+                for (i = 0; i < input.length; i++) {
+                    input[i].style.textDecoration = "underline";
+                }
+                for (i = 0; i < example.length; i++) {
+                    example[i].style.textDecoration = "underline";
+                }
+                return;
+            } if (statusLine == 1) {
+                statusLine = 2;
+                for (i = 0; i < input.length; i++) {
+                    input[i].style.textDecoration = "line-through";
+                }
+                for (i = 0; i < example.length; i++) {
+                    example[i].style.textDecoration = "line-through";
+                }
+                return;
+            } if (statusLine == 2) {
+                statusLine = 3;
+                for (i = 0; i < input.length; i++) {
+                    input[i].style.textDecoration = "overline";
+                }
+                for (i = 0; i < example.length; i++) {
+                    example[i].style.textDecoration = "overline";
+                }
+                return;
+            } if (statusLine == 3) {
+                statusLine = 4;
+                for (i = 0; i < input.length; i++) {
+                    input[i].style.textDecoration = "underline line-through";
+                }
+                for (i = 0; i < example.length; i++) {
+                    example[i].style.textDecoration = "underline line-through";
+                }
+                return;
+            } if (statusLine == 4) {
+                statusLine = 5;
+                for (i = 0; i < input.length; i++) {
+                    input[i].style.textDecoration = "underline overline";
+                }
+                for (i = 0; i < example.length; i++) {
+                    example[i].style.textDecoration = "underline overline";
+                }
+                return;
+            } if (statusLine == 5) {
+                statusLine = 6;
+                for (i = 0; i < input.length; i++) {
+                    input[i].style.textDecoration = "line-through overline";
+                }
+                for (i = 0; i < example.length; i++) {
+                    example[i].style.textDecoration = "line-through overline";
+                }
+                return;
+            } if (statusLine == 6) {
+                statusLine = 7;
+                for (i = 0; i < input.length; i++) {
+                    input[i].style.textDecoration = "underline overline line-through";
+                }
+                for (i = 0; i < example.length; i++) {
+                    example[i].style.textDecoration = "underline overline line-through";
+                }
+                return;
+            } else {
+                statusLine = 0;
+                for (i = 0; i < input.length; i++) {
+                    input[i].style.textDecoration = "none";
+                }
+                for (i = 0; i < example.length; i++) {
+                    example[i].style.textDecoration = "none";
+                }
+            }
+        }
+        //
+        //Top
+        //
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        } // When the user clicks on the button, scroll to the top of the document
+    </script>
+</head>
+<body>
+    <div id="loading">
+        <div class="loading-eclipse">
+            <div class="loading-eclipse-enclose">
+                <div></div>
+                <img src="logo.png" height="96" width="96" style="animation: loading-image 2s linear infinite;" />
+            </div>
+        </div>
+    </div>
+    <script language="JavaScript" type="text/javascript">
+        var load = this.document.getElementById("loading");
+        load.classList += "loading";
+        //
+        //Loading Space
+        //
+        window.onload = function () {
+            load.classList -= "loading";
+        }
+
+        var tchinese = " 甲乙丙丁戊己庚辛壬癸 子丑寅卯辰巳午未申酉戌亥 ";
+        var schinese = " 零壹贰参肆伍陆柒捌玖 拾佰仟亿兆 ";
+        var english = " ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz ";
+        var number = " 0123456789 ";
+        var symbol = " .:,;\'\"(!?)=[+-*/]|{~}&<^>%`#@ ";
+    </script>
+    <div id="panel">
+        <span>
+            字體大小 Size<br />
+            <a href="javascript:decreaseFontSize();">-</a>
+            <a href="javascript:increaseFontSize();">+</a><hr />
+            字重 Weight<br />
+            <a href="javascript:Change_Weight('+');">+</a>
+            <a href="javascript:Change_Weight('-');">-</a><hr />
+
+            <a href="javascript:toItalic();">斜體 Italic</a><br />
+            <a href="javascript:Change_Line();">綴線 Line</a><hr />
+            <a href="javascript:topFunction();" id="gotop" title="Go to top">Top</a>
+        </span>
+    </div>
+    <p><code>font.css</code> 的內容已匯入至 <code>main.css</code> ，還有文字輸入框的 placeholder 即為 font-face （不包括#）</p>
+    <p>不是每個字體都有許多字重，有些字體只有兩種（正常、粗）是正常的</p>
+    <hr />
+    <div id="blocks">
+        <div>
+            <p class="face">瀏覽器預設字體</p>
+            <p class="example">
+                <script>document.write(tchinese + schinese + english + number + symbol);</script>
+            </p>
+            <input type="text" placeholder="預設" />
+            <br />
+            <span class="tip_block"><span>會因為系統、瀏覽器而不同喔！</span></span>
+        </div>
+        <hr />
+        <div style="font-family: Huninn">
+            <p class="face">
+                <strong style="border-radius: 20px;background-color: #66ac35;"><font color="#000000">Just</font><font color="#FFFFFF">Font</font></strong><font color="#555555"> Open 粉圓</font>
+            </p>
+            <p class="example">
+                <script>document.write(tchinese + english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: Huninn" placeholder="#Huninn" />
+            <br />
+            <span class="tip_block"><span>開源！</span><span>只有正常字重</span></span>
+        </div>
+        <hr />
+        <div style="font-family: Sans_Forgetica">
+            <p class="face">Sans Forgetica</p>
+            <p class="example">
+                <script>document.write(english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: Sans_Forgetica" placeholder="#Sans_Forgetica" />
+        </div>
+        <hr />
+        <div style="font-family: Cascadia_C" class="Cascadia">
+            <p class="face">Microsoft Cascadia Code<br /><a href="javascript:setFont('Cascadia', 'Cascadia_C');">Common</a>  <a href="javascript:setFont('Cascadia', 'Cascadia_PL');">PL</a>  <a href="javascript:setFont('Cascadia', 'Cascadia_Mono');">Mono</a>  <a href="javascript:setFont('Cascadia', 'Cascadia_Mono_PL');">Mono PL</a></p>
+            <p class="example">
+                <script>document.write(english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: Cascadia_C" placeholder="#Cascadia_C" class="Cascadia" />
+        </div>
+        <hr />
+        <div style="font-family: IBM Plex Mono" class="IBM-Plex">
+            <p class="face">IBM Plex<br /><a href="javascript:setFont('IBM-Plex', 'IBM Plex Mono');">Mono</a>  <a href="javascript:setFont('IBM-Plex', 'IBM Plex Serif');">Serif</a>  <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans');">Sans</a>  <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Arabic');">Sans Arabic</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Condensed');">Sans Condensed</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Devanagari');">Sans Devanagari</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Hebrew');">Sans Hebrew</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Thai');">Sans Thai</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Thai Looped');">Sans Thai Looped</a></p>
+            <p class="example">
+                <script>document.write(english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: IBM Plex Mono" placeholder="#IBM Plex Mono" class="IBM-Plex" />
+        </div>
+        <hr />
+        <div style="font-family: OPPO_Sans">
+            <p class="face">OPPO Sans</p>
+            <p class="example">
+                <script>document.write(tchinese + schinese + english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: OPPO_Sans" placeholder="#OPPO_Sans" />
+        </div>
+        <hr />
+        <div style="font-family: Jason_Handwriting_1" class="Jason_HW">
+            <p class="face">清松手寫體<br /><a href="javascript:setFont('Jason_HW', 'Jason_Handwriting_1');">1</a>  <a href="javascript:setFont('Jason_HW', 'Jason_Handwriting_2');">2</a>  <a href="javascript:setFont('Jason_HW', 'Jason_Handwriting_3');">3</a></p>
+            <p class="example">
+                <script>document.write(tchinese + english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: Jason_Handwriting_1" placeholder="#Jason_Handwriting_1" class="Jason_HW" />
+        </div>
+        <hr />
+        <div style="font-family: I-Ngaan" class="I-">
+            <p class="face">一點<br /><a href="javascript:setFont('I-', 'I-Ngaan');">顏體</a>  <a href="javascript:setFont('I-', 'I-PenCrane-B');">鋼筆鶴體</a> <a href="javascript:setFont('I-', 'I-Ming_S');">明體 標準</a> <a href="javascript:setFont('I-', 'I-Ming_S_CP');">明體CP 標準</a> <a href="javascript:setFont('I-', 'I-Ming_Var');">明體異體 標準</a> <a href="javascript:setFont('I-', 'I-Ming_Var_CP');">明體異體CP 標準</a></p>
+            <p class="example">
+                <script>document.write(tchinese + english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: I-Ngaan" placeholder="#I-Ngaan" class="I-" />
+        </div>
+        <hr />
+        <div style="font-family: Taipei_Sans">
+            <p class="face">台北黑體 Taipei Sans</p>
+            <p class="example">
+                <script>document.write(tchinese + english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: Taipei_Sans" placeholder="#Taipei_Sans" />
+        </div>
+        <hr />
+        <div style="font-family: IKEA_Sofa_Sans" class="IKEA_Sofa">
+            <p class="face">IKEA Sofa Sans</p><br /><a href="javascript:setFont('IKEA_Sofa', 'IKEA_Sofa_Sans');">Sofa</a>  <a href="javascript:setFont('IKEA_Sofa', 'IKEA_Vallentuna_Sans');">Vallentuna</a>
+            <p class="example">
+                <script>document.write(english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: IKEA_Sofa_Sans" placeholder="#IKEA_Sofa_Sans" class="IKEA_Sofa" />
+        </div>
+        <hr />
+        <div style="font-family: Hanazono_A" class="Hanazono">
+            <p class="face">花園明朝體</p><br /><a href="javascript:setFont('Hanazono', 'Hanazono_A');">A</a>  <a href="javascript:setFont('Hanazono', 'Hanazono_B');">B</a>
+            <p class="example">
+                <script>document.write(tchinese + english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: Hanazono_A" placeholder="#Hanazono_A" class="Hanazono" />
+        </div>
+        <hr />
+        <script>addFont("Hanazono", "花園明朝體", tchinese, ["Hanazono_A", "Hanazono_B"], ["A", "B"], false);</script>
+    </div>
+    <p><a href="inline://www">test</a></p>
+    <p>This page is designed and the fonts are collected by <b style="font-style: italic;">Axialflow(王證傑)</b>.</p>
+</body>
+</html>
