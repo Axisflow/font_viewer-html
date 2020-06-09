@@ -482,7 +482,7 @@
         var schinese = " 零壹贰参肆伍陆柒捌玖 拾佰仟亿兆 ";
         var english = " ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz ";
         var number = " 0123456789 ";
-        var symbol = " .:,;\'\"(!?)+-*/= ";
+        var symbol = " .:,;\'\"(!?)=[+-*/]|{~}&<^>%`#@ ";
     </script>
     <div id="panel">
         <span>
@@ -587,6 +587,14 @@
             <script>document.write(english + number + symbol);</script>
         </p>
         <input type="text" style="font-family: IKEA_Sofa_Sans" placeholder="#IKEA_Sofa_Sans" class="IKEA_Sofa" />
+    </div>
+    <hr />
+    <div style="font-family: Hanazono_A" class="Hanazono">
+        <p class="face">花園明朝體</p><br /><a href="javascript:setFont('Hanazono', 'Hanazono_A');">A</a>  <a href="javascript:setFont('Hanazono', 'Hanazono_B');">B</a>
+        <p class="example">
+            <script>document.write(tchinese + english + number + symbol);</script>
+        </p>
+        <input type="text" style="font-family: Hanazono_A" placeholder="#Hanazono_A" class="Hanazono" />
     </div>
     <hr />
     <p><a href="inline://www">test</a></p>
