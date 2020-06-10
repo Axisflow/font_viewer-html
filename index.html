@@ -251,6 +251,19 @@
         document.ondragstart = function (e) { enableKey(); }; //for image
         document.oncontextmenu = function (e) { if (disableKey == true) { return false; } }; //for right
         //
+        //Add Font
+        //
+        function addFont(classname, face, example, fonts, fontsName, isOnlyFont) {
+            var mainBlock = document.getElementById('blocks');
+
+            var newContent = "<div style=\"font-family: " + fonts[0] + "\" class=\"" + classname + "\" ><p class=\"face\">" + face + "</p>";
+            if (isOnlyFont == false) { newContent += "<br />"; for (i = 0; i < fonts.length; i++) { newContent += " <a href=\"javascript: setFont(\'" + classname + "\', \'" + fonts[i] + "\');\" >" + fontsName[i] + "</a> "; } }
+            newContent += "<p class=\"example\">" + example + "</p><input type=\"text\" style=\"font-family: " + fonts[0] + "\" placeholder =\"#" + fonts[0] + "\" class=\"" + classname + "\" /></div>";
+
+            mainBlock.innerHTML += newContent;
+            mainBlock.appendChild(document.createElement('hr'));
+        }
+        //
         //Change Font
         //
         function setFont(classname, face) {
@@ -501,102 +514,90 @@
     <p><code>font.css</code> 的內容已匯入至 <code>main.css</code> ，還有文字輸入框的 placeholder 即為 font-face （不包括#）</p>
     <p>不是每個字體都有許多字重，有些字體只有兩種（正常、粗）是正常的</p>
     <hr />
-    <div>
-        <p class="face">瀏覽器預設字體</p>
-        <p class="example">
-            <script>document.write(tchinese + schinese + english + number + symbol);</script>
-        </p>
-        <input type="text" placeholder="預設" />
-        <br />
-        <span class="tip_block"><span>會因為系統、瀏覽器而不同喔！</span></span>
+    <div id="blocks">
+        <div>
+            <p class="face">瀏覽器預設字體</p>
+            <p class="example">
+                <script>document.write(tchinese + schinese + english + number + symbol);</script>
+            </p>
+            <input type="text" placeholder="預設" />
+            <br />
+            <span class="tip_block"><span>會因為系統、瀏覽器而不同喔！</span></span>
+        </div>
+        <hr />
+        <div style="font-family: Huninn">
+            <p class="face">
+                <strong style="border-radius: 20px;background-color: #66ac35;"><font color="#000000">Just</font><font color="#FFFFFF">Font</font></strong><font color="#555555"> Open 粉圓</font>
+            </p>
+            <p class="example">
+                <script>document.write(tchinese + english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: Huninn" placeholder="#Huninn" />
+            <br />
+            <span class="tip_block"><span>開源！</span><span>只有正常字重</span></span>
+        </div>
+        <hr />
+        <div style="font-family: Sans_Forgetica">
+            <p class="face">Sans Forgetica</p>
+            <p class="example">
+                <script>document.write(english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: Sans_Forgetica" placeholder="#Sans_Forgetica" />
+        </div>
+        <hr />
+        <div style="font-family: Cascadia_C" class="Cascadia">
+            <p class="face">Microsoft Cascadia Code<br /><a href="javascript:setFont('Cascadia', 'Cascadia_C');">Common</a>  <a href="javascript:setFont('Cascadia', 'Cascadia_PL');">PL</a>  <a href="javascript:setFont('Cascadia', 'Cascadia_Mono');">Mono</a>  <a href="javascript:setFont('Cascadia', 'Cascadia_Mono_PL');">Mono PL</a></p>
+            <p class="example">
+                <script>document.write(english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: Cascadia_C" placeholder="#Cascadia_C" class="Cascadia" />
+        </div>
+        <hr />
+        <div style="font-family: IBM Plex Mono" class="IBM-Plex">
+            <p class="face">IBM Plex<br /><a href="javascript:setFont('IBM-Plex', 'IBM Plex Mono');">Mono</a>  <a href="javascript:setFont('IBM-Plex', 'IBM Plex Serif');">Serif</a>  <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans');">Sans</a>  <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Arabic');">Sans Arabic</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Condensed');">Sans Condensed</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Devanagari');">Sans Devanagari</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Hebrew');">Sans Hebrew</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Thai');">Sans Thai</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Thai Looped');">Sans Thai Looped</a></p>
+            <p class="example">
+                <script>document.write(english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: IBM Plex Mono" placeholder="#IBM Plex Mono" class="IBM-Plex" />
+        </div>
+        <hr />
+        <div style="font-family: OPPO_Sans">
+            <p class="face">OPPO Sans</p>
+            <p class="example">
+                <script>document.write(tchinese + schinese + english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: OPPO_Sans" placeholder="#OPPO_Sans" />
+        </div>
+        <hr />
+        <div style="font-family: Jason_Handwriting_1" class="Jason_HW">
+            <p class="face">清松手寫體<br /><a href="javascript:setFont('Jason_HW', 'Jason_Handwriting_1');">1</a>  <a href="javascript:setFont('Jason_HW', 'Jason_Handwriting_2');">2</a>  <a href="javascript:setFont('Jason_HW', 'Jason_Handwriting_3');">3</a></p>
+            <p class="example">
+                <script>document.write(tchinese + english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: Jason_Handwriting_1" placeholder="#Jason_Handwriting_1" class="Jason_HW" />
+        </div>
+        <hr />
+        <div style="font-family: I-Ngaan" class="I-">
+            <p class="face">一點<br /><a href="javascript:setFont('I-', 'I-Ngaan');">顏體</a>  <a href="javascript:setFont('I-', 'I-PenCrane-B');">鋼筆鶴體</a> <a href="javascript:setFont('I-', 'I-Ming_S');">明體 標準</a> <a href="javascript:setFont('I-', 'I-Ming_S_CP');">明體CP 標準</a> <a href="javascript:setFont('I-', 'I-Ming_Var');">明體異體 標準</a> <a href="javascript:setFont('I-', 'I-Ming_Var_CP');">明體異體CP 標準</a></p>
+            <p class="example">
+                <script>document.write(tchinese + english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: I-Ngaan" placeholder="#I-Ngaan" class="I-" />
+        </div>
+        <hr />
+        <div style="font-family: Taipei_Sans">
+            <p class="face">台北黑體 Taipei Sans</p>
+            <p class="example">
+                <script>document.write(tchinese + english + number + symbol);</script>
+            </p>
+            <input type="text" style="font-family: Taipei_Sans" placeholder="#Taipei_Sans" />
+        </div>
+        <hr />
+        <script>
+            addFont("IKEA_Sofa", "IKEA Sofa Sans", english + number + symbol, ["IKEA_Sofa_Sans", "IKEA_Vallentuna_Sans"], ["Sofa", "Vallentuna"], false);
+            addFont("Hanazono", "花園明朝體", tchinese + english + number + symbol, ["Hanazono_A", "Hanazono_B"], ["A", "B"], false);
+        </script>
     </div>
-    <hr />
-    <div style="font-family: Huninn">
-        <p class="face">
-            <strong style="        border-radius: 20px;
-        background-color: #66ac35;
-"><font color="#000000">Just</font><font color="#FFFFFF">Font</font></strong><font color="#555555"> Open 粉圓</font>
-        </p>
-        <p class="example">
-            <script>document.write(tchinese + english + number + symbol);</script>
-        </p>
-        <input type="text" style="font-family: Huninn" placeholder="#Huninn" />
-        <br />
-        <span class="tip_block"><span>開源！</span><span>只有正常字重</span></span>
-    </div>
-    <hr />
-    <div style="font-family: Sans_Forgetica">
-        <p class="face">Sans Forgetica</p>
-        <p class="example">
-            <script>document.write(english + number + symbol);</script>
-        </p>
-        <input type="text" style="font-family: Sans_Forgetica" placeholder="#Sans_Forgetica" />
-    </div>
-    <hr />
-    <div style="font-family: Cascadia_C" class="Cascadia">
-        <p class="face">Microsoft Cascadia Code<br /><a href="javascript:setFont('Cascadia', 'Cascadia_C');">Common</a>  <a href="javascript:setFont('Cascadia', 'Cascadia_PL');">PL</a>  <a href="javascript:setFont('Cascadia', 'Cascadia_Mono');">Mono</a>  <a href="javascript:setFont('Cascadia', 'Cascadia_Mono_PL');">Mono PL</a></p>
-        <p class="example">
-            <script>document.write(english + number + symbol);</script>
-        </p>
-        <input type="text" style="font-family: Cascadia_C" placeholder="#Cascadia_C" class="Cascadia" />
-    </div>
-    <hr />
-    <div style="font-family: IBM Plex Mono" class="IBM-Plex">
-        <p class="face">IBM Plex<br /><a href="javascript:setFont('IBM-Plex', 'IBM Plex Mono');">Mono</a>  <a href="javascript:setFont('IBM-Plex', 'IBM Plex Serif');">Serif</a>  <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans');">Sans</a>  <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Arabic');">Sans Arabic</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Condensed');">Sans Condensed</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Devanagari');">Sans Devanagari</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Hebrew');">Sans Hebrew</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Thai');">Sans Thai</a> <a href="javascript:setFont('IBM-Plex', 'IBM Plex Sans Thai Looped');">Sans Thai Looped</a></p>
-        <p class="example">
-            <script>document.write(english + number + symbol);</script>
-        </p>
-        <input type="text" style="font-family: IBM Plex Mono" placeholder="#IBM Plex Mono" class="IBM-Plex" />
-    </div>
-    <hr />
-    <div style="font-family: OPPO_Sans">
-        <p class="face">OPPO Sans</p>
-        <p class="example">
-            <script>document.write(tchinese + schinese + english + number + symbol);</script>
-        </p>
-        <input type="text" style="font-family: OPPO_Sans" placeholder="#OPPO_Sans" />
-    </div>
-    <hr />
-    <div style="font-family: Jason_Handwriting_1" class="Jason_HW">
-        <p class="face">清松手寫體<br /><a href="javascript:setFont('Jason_HW', 'Jason_Handwriting_1');">1</a>  <a href="javascript:setFont('Jason_HW', 'Jason_Handwriting_2');">2</a>  <a href="javascript:setFont('Jason_HW', 'Jason_Handwriting_3');">3</a></p>
-        <p class="example">
-            <script>document.write(tchinese + english + number + symbol);</script>
-        </p>
-        <input type="text" style="font-family: Jason_Handwriting_1" placeholder="#Jason_Handwriting_1" class="Jason_HW" />
-    </div>
-    <hr />
-    <div style="font-family: I-Ngaan" class="I-">
-        <p class="face">一點<br /><a href="javascript:setFont('I-', 'I-Ngaan');">顏體</a>  <a href="javascript:setFont('I-', 'I-PenCrane-B');">鋼筆鶴體</a> <a href="javascript:setFont('I-', 'I-Ming_S');">明體 標準</a> <a href="javascript:setFont('I-', 'I-Ming_S_CP');">明體CP 標準</a> <a href="javascript:setFont('I-', 'I-Ming_Var');">明體異體 標準</a> <a href="javascript:setFont('I-', 'I-Ming_Var_CP');">明體異體CP 標準</a></p>
-        <p class="example">
-            <script>document.write(tchinese + english + number + symbol);</script>
-        </p>
-        <input type="text" style="font-family: I-Ngaan" placeholder="#I-Ngaan" class="I-" />
-    </div>
-    <hr />
-    <div style="font-family: Taipei_Sans">
-        <p class="face">台北黑體 Taipei Sans</p>
-        <p class="example">
-            <script>document.write(tchinese + english + number + symbol);</script>
-        </p>
-        <input type="text" style="font-family: Taipei_Sans" placeholder="#Taipei_Sans" />
-    </div>
-    <hr />
-    <div style="font-family: IKEA_Sofa_Sans" class="IKEA_Sofa">
-        <p class="face">IKEA Sofa Sans</p><br /><a href="javascript:setFont('IKEA_Sofa', 'IKEA_Sofa_Sans');">Sofa</a>  <a href="javascript:setFont('IKEA_Sofa', 'IKEA_Vallentuna_Sans');">Vallentuna</a>
-        <p class="example">
-            <script>document.write(english + number + symbol);</script>
-        </p>
-        <input type="text" style="font-family: IKEA_Sofa_Sans" placeholder="#IKEA_Sofa_Sans" class="IKEA_Sofa" />
-    </div>
-    <hr />
-    <div style="font-family: Hanazono_A" class="Hanazono">
-        <p class="face">花園明朝體</p><br /><a href="javascript:setFont('Hanazono', 'Hanazono_A');">A</a>  <a href="javascript:setFont('Hanazono', 'Hanazono_B');">B</a>
-        <p class="example">
-            <script>document.write(tchinese + english + number + symbol);</script>
-        </p>
-        <input type="text" style="font-family: Hanazono_A" placeholder="#Hanazono_A" class="Hanazono" />
-    </div>
-    <hr />
     <p><a href="inline://www">test</a></p>
     <p>This page is designed and the fonts are collected by <b style="font-style: italic;">Axialflow(王證傑)</b>.</p>
 </body>
