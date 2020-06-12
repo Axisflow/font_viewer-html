@@ -251,17 +251,44 @@
         document.ondragstart = function (e) { enableKey(); }; //for image
         document.oncontextmenu = function (e) { if (disableKey == true) { return false; } }; //for right
         //
+        //Register Font
+        //
+        var regs_classname = [""], regs_face = [""], regs_example = [""], regs_fonts = [""], regs_fontsName = [""], regs_tips = [""]; // ' "" ' means #default
+        function regFont(classname, face, example, fonts, fontsName, tips = []) {
+            regs_classname.push(classname);
+            regs_face.push(face);
+            regs_example.push(example);
+            regs_fonts.push(fonts);
+            regs_fontsName.push(fontsName);
+            regs_tips.push(tips);
+        }
+        //
         //Add Font
         //
-        function addFont(classname, face, example, fonts, fontsName, isOnlyFont) {
+        function addFont(classname, face, example, fonts, fontsName, tips = []) {
             var mainBlock = document.getElementById('blocks');
 
             var newContent = "<div style=\"font-family: " + fonts[0] + "\" class=\"" + classname + "\" ><p class=\"face\">" + face + "</p>";
-            if (isOnlyFont == false) { newContent += "<br />"; for (i = 0; i < fonts.length; i++) { newContent += " <a href=\"javascript: setFont(\'" + classname + "\', \'" + fonts[i] + "\');\" >" + fontsName[i] + "</a> "; } }
-            newContent += "<p class=\"example\">" + example + "</p><input type=\"text\" style=\"font-family: " + fonts[0] + "\" placeholder =\"#" + fonts[0] + "\" class=\"" + classname + "\" /></div>";
+            if (fonts.length > 1) { newContent += "<br />"; for (i = 0; i < fonts.length; i++) { newContent += " <a href=\"javascript: setFont(\'" + classname + "\', \'" + fonts[i] + "\');\" >" + fontsName[i] + "</a> "; } }
+            newContent += "<p class=\"example\">" + example + "</p><input type=\"text\" style=\"font-family: " + fonts[0] + "\" placeholder =\"#" + fonts[0] + "\" class=\"" + classname + "\" />";
+            if (tips.length > 0) { newContent += "<br /><span class=\"tip_block\">"; for (i = 0; i < tips.length; i++) { newContent += "<span>" + tips[i] + "</span>"; } newContent += "</span>"; }
+            newContent += "</div>";
 
             mainBlock.innerHTML += newContent;
             mainBlock.appendChild(document.createElement('hr'));
+        }
+        //
+        //Next Fonts
+        //
+        var numAddedFonts = 0;
+        function nextFonts(times = 1) {
+            for (i = 0; i < times; i++) {
+                if (numAddedFonts >= regs_classname.length -1 ) { break; }
+                else {
+                    var j = numAddedFonts + i + 1;
+                    addFont(regs_classname[j], regs_face[j], regs_example[j], regs_fonts[j], regs_fontsName[j], regs_tips[j]);
+                    numAddedFonts++;}
+            }
         }
         //
         //Change Font
@@ -577,27 +604,14 @@
             <input type="text" style="font-family: Jason_Handwriting_1" placeholder="#Jason_Handwriting_1" class="Jason_HW" />
         </div>
         <hr />
-        <div style="font-family: I-Ngaan" class="I-">
-            <p class="face">一點<br /><a href="javascript:setFont('I-', 'I-Ngaan');">顏體</a>  <a href="javascript:setFont('I-', 'I-PenCrane-B');">鋼筆鶴體</a> <a href="javascript:setFont('I-', 'I-Ming_S');">明體 標準</a> <a href="javascript:setFont('I-', 'I-Ming_S_CP');">明體CP 標準</a> <a href="javascript:setFont('I-', 'I-Ming_Var');">明體異體 標準</a> <a href="javascript:setFont('I-', 'I-Ming_Var_CP');">明體異體CP 標準</a></p>
-            <p class="example">
-                <script>document.write(tchinese + english + number + symbol);</script>
-            </p>
-            <input type="text" style="font-family: I-Ngaan" placeholder="#I-Ngaan" class="I-" />
-        </div>
-        <hr />
-        <div style="font-family: Taipei_Sans">
-            <p class="face">台北黑體 Taipei Sans</p>
-            <p class="example">
-                <script>document.write(tchinese + english + number + symbol);</script>
-            </p>
-            <input type="text" style="font-family: Taipei_Sans" placeholder="#Taipei_Sans" />
-        </div>
-        <hr />
         <script>
-            addFont("IKEA_Sofa", "IKEA Sofa Sans", english + number + symbol, ["IKEA_Sofa_Sans", "IKEA_Vallentuna_Sans"], ["Sofa", "Vallentuna"], false);
-            addFont("Hanazono", "花園明朝體", tchinese + english + number + symbol, ["Hanazono_A", "Hanazono_B"], ["A", "B"], false);
+            regFont("I-", "一點", tchinese + english + number + symbol, ["I-Ngaan", "I-PenCrane-B", "I-Ming_S", "I-Ming_S_CP", "I-Ming_Var", "I-Ming_Var_CP"], ["顏體", "鋼筆鶴體", "明體 標準", "明體CP 標準", "明體異體 標準","明體異體CP 標準"]);
+            regFont("Taipei_Sans", "台北黑體 Taipei Sans", tchinese + english + number + symbol, ["Taipei_Sans"], ["Taipei Sans"]);
+            regFont("IKEA_Sofa", "IKEA Sofa Sans", english + number + symbol, ["IKEA_Sofa_Sans", "IKEA_Vallentuna_Sans"], ["Sofa", "Vallentuna"]);
+            regFont("Hanazono", "花園明朝體", tchinese + english + number + symbol, ["Hanazono_A", "Hanazono_B"], ["A", "B"]);
         </script>
     </div>
+    <p><a href="javascript:nextFonts();">V</a></p>
     <p><a href="inline://www">test</a></p>
     <p>This page is designed and the fonts are collected by <b style="font-style: italic;">Axialflow(王證傑)</b>.</p>
 </body>
