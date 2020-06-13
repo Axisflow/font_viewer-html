@@ -34,7 +34,11 @@
                 padding: 10px 5px;
                 margin: 5px;
                 font-size: 20px;
+                transition: font-size 0.8s ease-in-out;
             }
+                .tip_block span:hover {
+                    font-size: 22.5px;
+                }
 
         code {
             background-color: #dddddd;
@@ -49,17 +53,20 @@
         }
 
         a {
-            font-size: 20px;
+            font-size: 22.5px;
             -moz-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
             -webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
             -ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-            transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+            transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out, font-size 0.2s ease-in-out;
+            top: 0;
             border-bottom: dotted 1px;
             color: #ff6a00;
             text-decoration: none;
         }
 
             a:hover {
+                top: -10px;
+                font-size: 25px;
                 border-bottom-color: transparent;
                 color: #999999;
             }
@@ -253,8 +260,8 @@
         //
         //Register Font
         //
-        var regs_classname = [""], regs_face = [""], regs_example = [""], regs_fonts = [""], regs_fontsName = [""], regs_tips = [""]; // ' "" ' means #default
-        function regFont(classname, face, example, fonts, fontsName, tips = []) {
+        var regs_classname = [""], regs_face = [""], regs_example = [""], regs_fonts = [[""]], regs_fontsName = [[]], regs_tips = [[]]; // ' "" ' means #default
+        function regFont(classname, face, example, fonts, fontsName = [], tips = []) {
             regs_classname.push(classname);
             regs_face.push(face);
             regs_example.push(example);
@@ -265,7 +272,7 @@
         //
         //Add Font
         //
-        function addFont(classname, face, example, fonts, fontsName, tips = []) {
+        function addFont(classname, face, example, fonts, fontsName = [], tips = []) {
             var mainBlock = document.getElementById('blocks');
 
             var newContent = "<div style=\"font-family: " + fonts[0] + "\" class=\"" + classname + "\" ><p class=\"face\">" + face + "</p>";
@@ -588,31 +595,19 @@
             <input type="text" style="font-family: IBM Plex Mono" placeholder="#IBM Plex Mono" class="IBM-Plex" />
         </div>
         <hr />
-        <div style="font-family: OPPO_Sans">
-            <p class="face">OPPO Sans</p>
-            <p class="example">
-                <script>document.write(tchinese + schinese + english + number + symbol);</script>
-            </p>
-            <input type="text" style="font-family: OPPO_Sans" placeholder="#OPPO_Sans" />
-        </div>
-        <hr />
-        <div style="font-family: Jason_Handwriting_1" class="Jason_HW">
-            <p class="face">清松手寫體<br /><a href="javascript:setFont('Jason_HW', 'Jason_Handwriting_1');">1</a>  <a href="javascript:setFont('Jason_HW', 'Jason_Handwriting_2');">2</a>  <a href="javascript:setFont('Jason_HW', 'Jason_Handwriting_3');">3</a></p>
-            <p class="example">
-                <script>document.write(tchinese + english + number + symbol);</script>
-            </p>
-            <input type="text" style="font-family: Jason_Handwriting_1" placeholder="#Jason_Handwriting_1" class="Jason_HW" />
-        </div>
-        <hr />
         <script>
-            regFont("I-", "一點", tchinese + english + number + symbol, ["I-Ngaan", "I-PenCrane-B", "I-Ming_S", "I-Ming_S_CP", "I-Ming_Var", "I-Ming_Var_CP"], ["顏體", "鋼筆鶴體", "明體 標準", "明體CP 標準", "明體異體 標準","明體異體CP 標準"]);
-            regFont("Taipei_Sans", "台北黑體 Taipei Sans", tchinese + english + number + symbol, ["Taipei_Sans"], ["Taipei Sans"]);
+            regFont("OPPO_Sans", "OPPO Sans", tchinese + schinese + english + number + symbol, ["OPPO_Sans"]);
+            regFont("Jason_HW", "清松手寫體", tchinese + english + number + symbol, ["Jason_Handwriting_1", "Jason_Handwriting_2", "Jason_Handwriting_3"], ["1", "2", "3"]);
+            regFont("I-", "一點", tchinese + english + number + symbol, ["I-Ngaan", "I-PenCrane-B", "I-Ming_S", "I-Ming_S_CP", "I-Ming_Var", "I-Ming_Var_CP"], ["顏體", "鋼筆鶴體", "明體 標準", "明體CP 標準", "明體異體 標準", "明體異體CP 標準"]);
+            regFont("Taipei_Sans", "台北黑體 Taipei Sans", tchinese + english + number + symbol, ["Taipei_Sans"]);
             regFont("IKEA_Sofa", "IKEA Sofa Sans", english + number + symbol, ["IKEA_Sofa_Sans", "IKEA_Vallentuna_Sans"], ["Sofa", "Vallentuna"]);
             regFont("Hanazono", "花園明朝體", tchinese + english + number + symbol, ["Hanazono_A", "Hanazono_B"], ["A", "B"]);
         </script>
     </div>
-    <p><a href="javascript:nextFonts();">V</a></p>
+    <p><a href="javascript:nextFonts();" title="下一個">V</a></p>
     <p><a href="inline://www">test</a></p>
     <p>This page is designed and the fonts are collected by <b style="font-style: italic;">Axialflow(王證傑)</b>.</p>
+    <script src="advertisement.js" type="text/javascript"></script>
+    <p><a href="javascript:showAD('http://www.Google.com/');" title="AD">Advertisement</a></p>
 </body>
 </html>
