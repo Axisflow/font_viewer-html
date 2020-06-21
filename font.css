@@ -16,3 +16,8 @@
     font-family: Sans_Forgetica;
     src: url(SansForgetica-Regular.otf) format('opentype');
 }
+
+@font-face {
+    font-family: Press_Start_2P;
+    src: url(PressStart2P-Regular.ttf) format('truetype');
+}
