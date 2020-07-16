@@ -1,0 +1,12 @@
+@font-face { font-family: 'Goldman_Sans'; font-weight: 100; font-style: normal; src: local("Goldman Sans Thin"), local("GoldmanSans_Th"), url("GoldmanSans_Th.ttf") format('truetype'); }
+@font-face { font-family: 'Goldman_Sans'; font-weight: 300; font-style: normal; src: local("Goldman Sans Light"), local("GoldmanSans_Lt"), url("GoldmanSans_Lt.ttf") format('truetype'); }
+@font-face { font-family: 'Goldman_Sans'; font-weight: 400; font-style: normal; src: local("Goldman Sans Regular"), local("GoldmanSans_Rg"), url("GoldmanSans_Rg.ttf") format('truetype'); }
+@font-face { font-family: 'Goldman_Sans'; font-weight: 400; font-style: italic; src: local("Goldman Sans Italic"), local("GoldmanSans_It"), url("GoldmanSans_It.ttf") format('truetype'); }
+@font-face { font-family: 'Goldman_Sans'; font-weight: 500; font-style: normal; src: local("Goldman Sans Medium"), local("GoldmanSans_Md"), url("GoldmanSans_Md.ttf") format('truetype'); }
+@font-face { font-family: 'Goldman_Sans'; font-weight: 500; font-style: italic; src: local("Goldman Sans Medium Italic"), local("GoldmanSans_MdIt"), url("GoldmanSans_MdIt.ttf") format('truetype'); }
+@font-face { font-family: 'Goldman_Sans'; font-weight: 700; font-style: normal; src: local("Goldman Sans Bold"), local("GoldmanSans_Bd"), url("GoldmanSans_Bd.ttf") format('truetype'); }
+@font-face { font-family: 'Goldman_Sans'; font-weight: 700; font-style: italic; src: local("Goldman Sans Bold Italic"), local("GoldmanSans_BdIt"), url("GoldmanSans_BdIt.ttf") format('truetype'); }
+@font-face { font-family: 'Goldman_Sans'; font-weight: 900; font-style: normal; src: local("Goldman Sans Black"), local("GoldmanSans_Blk"), url("GoldmanSans_Blk.ttf") format('truetype'); }
+
+@import url("Variable/goldman-sans-variable.css");
+@import url("Condensed/goldman-sans-condensed.css");
